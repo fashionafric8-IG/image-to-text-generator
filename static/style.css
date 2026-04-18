@@ -1,0 +1,42 @@
+/* Additional Custom Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* Custom scrollbar for the entire page and textarea */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a; /* dark-900 */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #334155; /* slate-700 */
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #475569; /* slate-600 */
+}
+
+/* Ensure textarea takes available height but has min/max constraints */
+#ocrOutput {
+    min-height: 250px;
+    line-height: 1.6;
+}
+
+/* Fallback for animation delays if inline styles aren't enough */
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+.animation-delay-4000 {
+    animation-delay: 4s;
+}
+
+/* Selection Color Override */
+::selection {
+    background-color: #6366f1; /* primary-500 */
+    color: white;
+}
