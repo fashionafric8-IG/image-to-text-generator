@@ -27,10 +27,3 @@ def preprocess_for_ocr(image_path):
     processed_image = Image.fromarray(thresh)
     
     return processed_image
-
-def load_image_for_easyocr(image_path):
-    """
-    EasyOCR can read the path directly or use a numpy array.
-    We just return the path, or we can use OpenCV image.
-    """
-    return image_path

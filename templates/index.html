@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Image to Text Extractor | Advanced OCR & Captioning</title>
-    
+    <title>Professional Image Extractor | Enterprise OCR Platform</title>
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Extract text from images using advanced AI OCR engines (Tesseract & EasyOCR) and generate intelligent image captions with state-of-the-art Transformers.">
-    <meta name="keywords" content="OCR, Image to Text, AI Captioning, EasyOCR, Tesseract, Transformers, Image Processing">
+    <meta name="description"
+        content="Professional-grade image-to-text extraction tool for high-precision data workflows.">
+    <meta name="keywords" content="Professional OCR, Image to Text, Enterprise Extraction, Data Processing">
     <meta name="author" content="Image to Text Generator">
     <meta name="robots" content="index, follow">
 
@@ -20,8 +22,9 @@
     <!-- Google Fonts: Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -78,58 +81,77 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-dark-950 text-slate-300 font-sans min-h-screen relative overflow-x-hidden selection:bg-primary-500 selection:text-white">
+
+<body
+    class="bg-dark-950 text-slate-300 font-sans min-h-screen relative overflow-x-hidden selection:bg-primary-500 selection:text-white">
 
     <!-- Ambient Background Blobs -->
     <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob"></div>
-        <div class="absolute top-0 right-1/4 w-96 h-96 bg-secondary-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-1/2 w-96 h-96 bg-pink-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-4000"></div>
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-primary-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 right-1/4 w-96 h-96 bg-secondary-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute -bottom-32 left-1/2 w-96 h-96 bg-pink-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-4000">
+        </div>
     </div>
 
     <main class="relative z-10 max-w-6xl mx-auto px-4 py-12 md:py-20">
         <header class="text-center mb-16 animate-fade-in">
-            <div class="inline-flex items-center justify-center px-4 py-1.5 mb-6 rounded-full bg-slate-800/50 border border-slate-700 backdrop-blur-sm text-sm font-medium text-primary-400">
-                <i class="fas fa-sparkles mr-2 text-yellow-400"></i> Powered by AI Transformers
-            </div>
-            <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400">
-                Image to Text Extractor
+            <h1
+                class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400">
+                Image-to-Text Extractor
             </h1>
+
             <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto">
-                Seamlessly extract text using <span class="text-primary-400 font-medium">Tesseract</span> & <span class="text-secondary-400 font-medium">EasyOCR</span>, enhanced with intelligent context captioning.
+                A high-precision, AI-powered system designed for seamless optical character recognition and efficient
+                text extraction from images, optimized for enterprise workflows.
             </p>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <!-- Left Column: Upload Section -->
-            <section class="bg-dark-900/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-800/80 p-6 md:p-8 flex flex-col relative overflow-hidden group animate-slide-up">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-75"></div>
-                
+            <section
+                class="bg-dark-900/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-800/80 p-6 md:p-8 flex flex-col relative overflow-hidden group animate-slide-up">
+                <div
+                    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-75">
+                </div>
+
                 <h2 class="text-2xl font-bold mb-6 text-white flex items-center">
                     <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center mr-3 shadow-inner">
                         <i class="fas fa-cloud-upload-alt text-primary-400"></i>
                     </div>
                     Upload Media
                 </h2>
-                
+
                 <form id="uploadForm" class="flex-grow flex flex-col relative z-10">
-                    <div id="dropZone" class="flex-grow border-2 border-dashed border-slate-700 rounded-2xl p-10 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary-500 hover:bg-slate-800/40 transition-all duration-300 mb-6 group/drop">
-                        <div class="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center mb-4 group-hover/drop:scale-110 group-hover/drop:bg-primary-900/60 transition-transform duration-300 shadow-lg">
+                    <div id="dropZone"
+                        class="flex-grow border-2 border-dashed border-slate-700 rounded-2xl p-10 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary-500 hover:bg-slate-800/40 transition-all duration-300 mb-6 group/drop">
+                        <div
+                            class="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center mb-4 group-hover/drop:scale-110 group-hover/drop:bg-primary-900/60 transition-transform duration-300 shadow-lg">
                             <i class="fas fa-image text-3xl text-primary-400"></i>
                         </div>
                         <p class="text-lg text-slate-200 font-medium mb-2">Drag & drop your image</p>
                         <p class="text-sm text-slate-500 mb-4">PNG, JPG, JPEG up to 10MB</p>
-                        <button type="button" class="px-6 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors font-medium text-sm border border-slate-700 focus:outline-none">
+                        <button type="button"
+                            class="px-6 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors font-medium text-sm border border-slate-700 focus:outline-none">
                             Browse Files
                         </button>
                         <input type="file" id="fileInput" name="image" accept="image/*" class="hidden">
                     </div>
-                    
+
                     <!-- Preview -->
-                    <div id="previewContainer" class="hidden mb-6 relative rounded-2xl overflow-hidden border border-slate-700 shadow-xl group/preview bg-dark-950 flex items-center justify-center min-h-[200px]">
-                        <img id="imagePreview" src="" alt="Selected image preview" class="w-full h-auto max-h-80 object-contain">
-                        <div class="absolute inset-0 bg-dark-950/60 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button type="button" id="clearBtn" class="bg-red-500/90 hover:bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center focus:outline-none transform hover:scale-110 transition-all shadow-lg" aria-label="Remove image">
+                    <div id="previewContainer"
+                        class="hidden mb-6 relative rounded-2xl overflow-hidden border border-slate-700 shadow-xl group/preview bg-dark-950 flex items-center justify-center min-h-[200px]">
+                        <img id="imagePreview" src="" alt="Selected image preview"
+                            class="w-full h-auto max-h-80 object-contain">
+                        <div
+                            class="absolute inset-0 bg-dark-950/60 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                            <button type="button" id="clearBtn"
+                                class="bg-red-500/90 hover:bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center focus:outline-none transform hover:scale-110 transition-all shadow-lg"
+                                aria-label="Remove image">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
@@ -137,38 +159,18 @@
 
                     <!-- Configuration Options -->
                     <div class="space-y-5 mb-8 bg-slate-800/30 p-5 rounded-2xl border border-slate-700/50">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-300 mb-2 flex items-center">
-                                <i class="fas fa-cogs text-secondary-400 w-5"></i> OCR Engine
-                            </label>
-                            <div class="relative">
-                                <select name="engine" id="engineSelect" class="appearance-none w-full bg-slate-800 border border-slate-600 text-white rounded-xl py-3 px-4 leading-tight focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors cursor-pointer">
-                                    <option value="tesseract">Tesseract (Fast, General Purpose)</option>
-                                    <option value="easyocr">EasyOCR (High Accuracy, Multi-lang)</option>
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
-                                    <i class="fas fa-chevron-down text-xs"></i>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center bg-slate-800/50 p-3 rounded-xl border border-slate-700/50 hover:bg-slate-800/70 transition-colors">
-                            <div class="relative flex items-start w-full">
-                                <div class="flex items-center h-5">
-                                    <input type="checkbox" id="generateCaption" name="generate_caption" value="true" checked class="w-5 h-5 bg-slate-800 border-slate-600 rounded text-primary-500 focus:ring-primary-500 focus:ring-offset-dark-900 cursor-pointer">
-                                </div>
-                                <div class="ml-3 text-sm flex-grow">
-                                    <label for="generateCaption" class="font-medium text-slate-200 cursor-pointer block">AI Context Analysis</label>
-                                    <p class="text-slate-500 text-xs mt-0.5">Generate an intelligent description of the image</p>
-                                </div>
-                            </div>
+                        <div class="flex items-center p-2">
+                            <i class="fas fa-microchip text-primary-400 mr-3"></i>
+                            <span class="text-sm text-slate-300 font-medium">Engine: Tesseract OCR (Lightweight)</span>
                         </div>
                     </div>
 
-                    <button type="submit" id="processBtn" class="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 group relative overflow-hidden">
-                        <span class="absolute top-0 left-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out z-0"></span>
+                    <button type="submit" id="processBtn"
+                        class="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 group relative overflow-hidden">
+                        <span
+                            class="absolute top-0 left-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out z-0"></span>
                         <span id="btnText" class="relative z-10 flex items-center justify-center text-lg">
-                            <i class="fas fa-wand-magic-sparkles mr-2"></i> Extract Intelligence
+                            <i class="fas fa-microchip mr-2"></i> Process Image
                         </span>
                         <span id="btnSpinner" class="hidden relative z-10 flex items-center justify-center text-lg">
                             <i class="fas fa-circle-notch fa-spin mr-2"></i> Processing...
@@ -178,8 +180,11 @@
             </section>
 
             <!-- Right Column: Results Section -->
-            <section class="bg-dark-900/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-800/80 p-6 md:p-8 flex flex-col h-full relative overflow-hidden animate-slide-up" style="animation-delay: 0.1s;">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-75"></div>
+            <section
+                class="bg-dark-900/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-800/80 p-6 md:p-8 flex flex-col h-full relative overflow-hidden animate-slide-up"
+                style="animation-delay: 0.1s;">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-75">
+                </div>
 
                 <h2 class="text-2xl font-bold mb-6 text-white flex items-center">
                     <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center mr-3 shadow-inner">
@@ -187,19 +192,22 @@
                     </div>
                     Output Console
                 </h2>
-                
+
                 <!-- Initial State -->
-                <div id="emptyState" class="flex-grow flex flex-col items-center justify-center text-slate-500 h-64 border-2 border-dashed border-slate-800/60 rounded-2xl bg-slate-800/20">
-                    <div class="w-24 h-24 rounded-full bg-slate-800/60 flex items-center justify-center mb-6 shadow-inner">
+                <div id="emptyState"
+                    class="flex-grow flex flex-col items-center justify-center text-slate-500 h-64 border-2 border-dashed border-slate-800/60 rounded-2xl bg-slate-800/20">
+                    <div
+                        class="w-24 h-24 rounded-full bg-slate-800/60 flex items-center justify-center mb-6 shadow-inner">
                         <i class="fas fa-laptop-code text-4xl text-slate-600"></i>
                     </div>
                     <h3 class="text-xl font-medium text-slate-400 mb-2">Awaiting Input</h3>
-                    <p class="text-center text-sm px-6 max-w-sm">Upload an image and run extraction to see the structured output here.</p>
+                    <p class="text-center text-sm px-6 max-w-sm">Upload an image and run extraction to see the
+                        structured output here.</p>
                 </div>
 
                 <!-- Results container -->
                 <div id="resultsContainer" class="hidden flex-grow flex flex-col h-full">
-                    
+
                     <!-- OCR Result (Prominent) -->
                     <article class="flex-grow flex flex-col mb-6">
                         <div class="flex justify-between items-center mb-3">
@@ -207,32 +215,25 @@
                                 <i class="fas fa-align-left text-primary-400 mr-2"></i> Extracted Text
                             </h3>
                             <div class="flex space-x-2">
-                                <button id="copyBtn" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-medium transition-colors border border-slate-700 flex items-center focus:outline-none" title="Copy to clipboard">
+                                <button id="copyBtn"
+                                    class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-medium transition-colors border border-slate-700 flex items-center focus:outline-none"
+                                    title="Copy to clipboard">
                                     <i class="fas fa-copy mr-1.5"></i> <span id="copyText">Copy</span>
                                 </button>
-                                <button id="downloadBtn" class="px-3 py-1.5 bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-400 hover:border-emerald-700/50 text-slate-300 rounded-lg text-xs font-medium transition-all border border-slate-700 flex items-center focus:outline-none" title="Download as .txt">
+                                <button id="downloadBtn"
+                                    class="px-3 py-1.5 bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-400 hover:border-emerald-700/50 text-slate-300 rounded-lg text-xs font-medium transition-all border border-slate-700 flex items-center focus:outline-none"
+                                    title="Download as .txt">
                                     <i class="fas fa-download mr-1.5"></i> Save
                                 </button>
                             </div>
                         </div>
                         <div class="relative flex-grow flex flex-col group">
-                            <textarea id="ocrOutput" class="w-full flex-grow p-5 bg-dark-950/80 border border-slate-700 rounded-xl text-slate-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 resize-none font-mono text-sm shadow-inner transition-colors z-10" readonly placeholder="Extraction results will appear here..."></textarea>
-                            <div class="absolute top-4 right-4 pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity z-0">
+                            <textarea id="ocrOutput"
+                                class="w-full flex-grow p-5 bg-dark-950/80 border border-slate-700 rounded-xl text-slate-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 resize-none font-mono text-sm shadow-inner transition-colors z-10"
+                                readonly placeholder="Extraction results will appear here..."></textarea>
+                            <div
+                                class="absolute top-4 right-4 pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity z-0">
                                 <i class="fas fa-quote-right text-6xl text-slate-400"></i>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- AI Caption Result (Secondary) -->
-                    <article class="bg-slate-800/40 rounded-xl border border-slate-700/60 overflow-hidden">
-                        <div class="bg-slate-800/60 px-4 py-3 border-b border-slate-700/60 flex items-center">
-                            <h3 class="font-semibold text-slate-300 flex items-center text-sm uppercase tracking-wider">
-                                <i class="fas fa-robot text-secondary-400 mr-2"></i> AI Context
-                            </h3>
-                        </div>
-                        <div class="p-4 bg-dark-950/50">
-                            <div id="captionOutput" class="text-slate-300 leading-relaxed min-h-[3rem] flex items-center text-sm">
-                                <!-- Caption goes here -->
                             </div>
                         </div>
                     </article>
@@ -253,12 +254,11 @@
         const processBtn = document.getElementById('processBtn');
         const btnText = document.getElementById('btnText');
         const btnSpinner = document.getElementById('btnSpinner');
-        
+
         const emptyState = document.getElementById('emptyState');
         const resultsContainer = document.getElementById('resultsContainer');
         const ocrOutput = document.getElementById('ocrOutput');
-        const captionOutput = document.getElementById('captionOutput');
-        
+
         const copyBtn = document.getElementById('copyBtn');
         const copyText = document.getElementById('copyText');
         const downloadBtn = document.getElementById('downloadBtn');
@@ -297,7 +297,7 @@
             fileInput.click();
         });
 
-        fileInput.addEventListener('change', function() {
+        fileInput.addEventListener('change', function () {
             handleFiles(this.files);
         });
 
@@ -306,14 +306,14 @@
                 const file = files[0];
                 if (file.type.startsWith('image/')) {
                     currentFile = file;
-                    
+
                     // Show preview
                     const reader = new FileReader();
                     reader.onload = (e) => {
                         imagePreview.src = e.target.result;
                         dropZone.classList.add('hidden');
                         previewContainer.classList.remove('hidden');
-                        
+
                         // Add animation class
                         previewContainer.classList.add('animate-fade-in');
                         setTimeout(() => previewContainer.classList.remove('animate-fade-in'), 500);
@@ -334,15 +334,14 @@
             dropZone.classList.remove('hidden');
             dropZone.classList.add('animate-fade-in');
             setTimeout(() => dropZone.classList.remove('animate-fade-in'), 500);
-            
+
             // Reset results smoothly
             resultsContainer.classList.add('hidden');
             emptyState.classList.remove('hidden');
             emptyState.classList.add('animate-fade-in');
             setTimeout(() => emptyState.classList.remove('animate-fade-in'), 500);
-            
+
             ocrOutput.value = '';
-            captionOutput.innerHTML = '';
         });
 
         // Form Submit
@@ -362,36 +361,28 @@
             processBtn.disabled = true;
             btnText.classList.add('hidden');
             btnSpinner.classList.remove('hidden');
-            
+
             emptyState.classList.add('hidden');
             resultsContainer.classList.remove('hidden');
             resultsContainer.classList.add('animate-fade-in');
-            
+
             ocrOutput.value = '> Initializing extraction pipeline...\n> Please wait, analyzing image structure...';
-            captionOutput.innerHTML = '<span class="flex items-center text-primary-400"><i class="fas fa-circle-notch fa-spin mr-2"></i> Processing visual context via Neural Network...</span>';
 
             try {
                 const response = await fetch('/process', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 const data = await response.json();
-                
+
                 if (response.ok) {
                     ocrOutput.value = data.ocr_text || 'No text detected in the image.';
-                    if (data.ai_caption) {
-                        captionOutput.innerHTML = `<span class="text-slate-200">"${data.ai_caption}"</span>`;
-                    } else {
-                        captionOutput.innerHTML = `<span class="text-slate-500 italic">Captioning skipped or failed.</span>`;
-                    }
                 } else {
                     ocrOutput.value = '> ERROR: ' + (data.error || 'Unknown error occurred.');
-                    captionOutput.innerHTML = `<span class="text-red-400">Failed to generate context.</span>`;
                 }
             } catch (error) {
                 ocrOutput.value = '> CONNECTION ERROR: ' + error.message;
-                captionOutput.innerHTML = '';
             } finally {
                 processBtn.disabled = false;
                 btnSpinner.classList.add('hidden');
@@ -407,8 +398,8 @@
                     const originalHTML = copyBtn.innerHTML;
                     copyBtn.innerHTML = '<i class="fas fa-check text-emerald-400 mr-1.5"></i> <span class="text-emerald-400">Copied!</span>';
                     copyBtn.classList.add('border-emerald-500', 'bg-emerald-900/30');
-                    setTimeout(() => { 
-                        copyBtn.innerHTML = originalHTML; 
+                    setTimeout(() => {
+                        copyBtn.innerHTML = originalHTML;
                         copyBtn.classList.remove('border-emerald-500', 'bg-emerald-900/30');
                     }, 2000);
                 });
@@ -427,7 +418,7 @@
                         },
                         body: JSON.stringify({ text: text })
                     });
-                    
+
                     if (response.ok) {
                         const blob = await response.blob();
                         const url = window.URL.createObjectURL(blob);
@@ -452,4 +443,5 @@
         document.querySelectorAll('.animation-delay-4000').forEach(el => el.style.animationDelay = '4s');
     </script>
 </body>
+
 </html>

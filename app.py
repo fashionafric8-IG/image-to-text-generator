@@ -5,10 +5,8 @@ import tempfile
 import io
 
 # Import project modules
-from utils.image_preprocessing import preprocess_for_ocr, load_image_for_easyocr
+from utils.image_preprocessing import preprocess_for_ocr
 from ocr_engine.tesseract_ocr import extract_text_tesseract
-from ocr_engine.easyocr_engine import extract_text_easyocr
-from ai_caption.caption_generator import generate_caption
 
 app = Flask(__name__)
 
@@ -27,6 +25,18 @@ def allowed_file(filename):
 def index():
     return render_template('index.html')
 
+def extract_text(file_path):
+    """
+    Unified OCR function that applies preprocessing and uses Tesseract.
+    """
+    try:
+        preprocessed_img = preprocess_for_ocr(file_path)
+        ocr_text = extract_text_tesseract(preprocessed_img)
+        return ocr_text if ocr_text.strip() else "No text could be extracted from this image."
+    except Exception as e:
+        print(f"Extraction error: {e}")
+        return "Error processing image for OCR."
+
 @app.route('/process', methods=['POST'])
 def process_image_web():
     if 'image' not in request.files:
@@ -44,39 +54,12 @@ def process_image_web():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
 
-        ocr_engine = request.form.get('engine', 'tesseract')
-
         try:
-            # 1. Image Preprocessing & OCR
-            ocr_text = ""
-            if ocr_engine == 'easyocr':
-                ocr_text = extract_text_easyocr(file_path)
-            else:
-                # Default to Tesseract
-                try:
-                    preprocessed_img = preprocess_for_ocr(file_path)
-                    ocr_text = extract_text_tesseract(preprocessed_img)
-                    
-                    # Fallback if tesseract fails entirely (empty result or error)
-                    if not ocr_text.strip():
-                        ocr_text = extract_text_easyocr(file_path)
-                except Exception as e:
-                    print(f"Preprocessing/Tesseract error: {e}")
-                    ocr_text = extract_text_easyocr(file_path)
-
-            if not ocr_text:
-                ocr_text = "No text could be extracted from this image."
-
-            # 2. AI Captioning (Advanced Feature)
-            # You can make this optional based on a toggle to speed up response
-            generate_caption_flag = request.form.get('generate_caption', 'true').lower() == 'true'
-            ai_caption = ""
-            if generate_caption_flag:
-                ai_caption = generate_caption(file_path)
+            # 1. Image Preprocessing & OCR (Tesseract Only)
+            ocr_text = extract_text(file_path)
 
             return jsonify({
                 'ocr_text': ocr_text,
-                'ai_caption': ai_caption,
                 'status': 'success'
             })
 

@@ -1,9 +1,7 @@
 flask
 pytesseract
-easyocr
-opencv-python-headless
 pillow
-torch
-transformers
+flask-cors
+opencv-python-headless
 werkzeug
 gunicorn

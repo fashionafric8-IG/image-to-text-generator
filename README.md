@@ -3,12 +3,10 @@
 A complete AI-powered Python web application built with Flask for extracting text from images (OCR) and generating human-readable image captions.
 
 ## Main Purpose
-The core functionality of this application is **Image to Text Extraction (OCR)**. It uses Tesseract OCR as the primary engine and provides EasyOCR as a reliable fallback for diverse languages and complex scenarios.
+The core functionality of this application is **Image to Text Extraction (OCR)**. It uses Tesseract OCR as the primary engine for fast and reliable extraction.
 
-## Features
-- **OCR System**: Extracts text using Tesseract and EasyOCR.
+- **OCR System**: Extracts text using Tesseract.
 - **Image Preprocessing**: Auto-converts to grayscale, applies thresholding, and reduces noise to optimize OCR results.
-- **AI Captioning**: Automatically generates descriptive text for the image using HuggingFace `VisionEncoderDecoderModel`.
 - **Web UI**: Modern, clean, TailwindCSS-powered frontend with drag-and-drop support.
 - **Developer API**: Built-in REST endpoint `/api/process-image`.
 
@@ -28,7 +26,7 @@ The core functionality of this application is **Image to Text Extraction (OCR)**
    ```bash
    pip install -r requirements.txt
    ```
-
+venv\Scripts\activate
 ## Running the Application
 
 1. Start the Flask server:
