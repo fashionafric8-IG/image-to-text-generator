@@ -20,6 +20,9 @@ def extract_text_tesseract(image):
     Accepts a PIL Image object (typically preprocessed).
     """
     try:
+        if not isinstance(image, Image.Image):
+            raise TypeError(f"Expected PIL Image object, got {type(image)}")
+            
         # We can add a simple language detection or config if needed, but for now, default config.
         text = pytesseract.image_to_string(image)
         return text.strip()

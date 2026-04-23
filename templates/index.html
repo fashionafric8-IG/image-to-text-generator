@@ -1,30 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Image Extractor | Enterprise OCR Platform</title>
-
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Professional-grade image-to-text extraction tool for high-precision data workflows.">
-    <meta name="keywords" content="Professional OCR, Image to Text, Enterprise Extraction, Data Processing">
-    <meta name="author" content="Image to Text Generator">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="AI Image to Text Extractor">
-    <meta property="og:description" content="Extract text and generate captions from images using AI.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/static/og-image.jpg">
-
-    <!-- Google Fonts: Outfit -->
+    <title>OCR Tool | ToolsFlash</title>
+    
+    <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -33,415 +18,328 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     },
                     colors: {
-                        primary: {
-                            400: '#818cf8',
-                            500: '#6366f1',
-                            600: '#4f46e5',
-                        },
-                        secondary: {
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                        },
-                        dark: {
-                            800: '#1e293b',
-                            900: '#0f172a',
-                            950: '#020617',
+                        brand: {
+                            cyan: '#00f2fe',
+                            purple: '#7b61ff',
+                            dark: '#0a0a0a',
                         }
                     },
                     animation: {
-                        'blob': 'blob 7s infinite',
-                        'fade-in': 'fadeIn 0.5s ease-out',
-                        'slide-up': 'slideUp 0.5s ease-out',
+                        'gradient': 'gradient 8s linear infinite',
+                        'scan': 'scan 2.5s ease-in-out infinite',
                     },
                     keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        gradient: {
+                            '0%, 100%': { 'background-size': '200% 200%', 'background-position': 'left center' },
+                            '50%': { 'background-size': '200% 200%', 'background-position': 'right center' },
                         },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: '0' },
-                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        scan: {
+                            '0%, 100%': { top: '0%', opacity: 0 },
+                            '50%': { top: '100%', opacity: 1 },
                         }
                     }
                 }
             }
         }
     </script>
-    <link href="/static/style.css" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            background-color: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toolsflash-gradient {
+            background: linear-gradient(135deg, #00f2fe 0%, #7b61ff 100%);
+        }
+
+        .toolsflash-gradient-text {
+            background: linear-gradient(135deg, #00f2fe 0%, #7b61ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .input-area {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .input-area:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00f2fe 0%, #7b61ff 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(123, 97, 255, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .scan-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00f2fe, transparent);
+            position: absolute;
+            width: 100%;
+            z-index: 20;
+            box-shadow: 0 0 15px #00f2fe;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    </style>
 </head>
+<body class="text-gray-100 antialiased selection:bg-purple-500/30 p-6">
 
-<body
-    class="bg-dark-950 text-slate-300 font-sans min-h-screen relative overflow-x-hidden selection:bg-primary-500 selection:text-white">
-
-    <!-- Ambient Background Blobs -->
-    <div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        <div
-            class="absolute top-0 left-1/4 w-96 h-96 bg-primary-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob">
-        </div>
-        <div
-            class="absolute top-0 right-1/4 w-96 h-96 bg-secondary-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-2000">
-        </div>
-        <div
-            class="absolute -bottom-32 left-1/2 w-96 h-96 bg-pink-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-blob animation-delay-4000">
-        </div>
-    </div>
-
-    <main class="relative z-10 max-w-6xl mx-auto px-4 py-12 md:py-20">
-        <header class="text-center mb-16 animate-fade-in">
-            <h1
-                class="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400">
-                Image-to-Text Extractor
+    <div class="w-full max-w-4xl mx-auto space-y-12">
+        
+        <!-- Small Centered Title (Serif) -->
+        <header class="text-center">
+            <h1 class="text-xl font-serif text-white tracking-wide mb-1">
+                Image-to-Text <span class="toolsflash-gradient-text italic font-bold">OCR</span>
             </h1>
-
-            <p class="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto">
-                A high-precision, AI-powered system designed for seamless optical character recognition and efficient
-                text extraction from images, optimized for enterprise workflows.
-            </p>
+            <div class="w-12 h-[1px] toolsflash-gradient mx-auto opacity-50"></div>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            <!-- Left Column: Upload Section -->
-            <section
-                class="bg-dark-900/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-800/80 p-6 md:p-8 flex flex-col relative overflow-hidden group animate-slide-up">
-                <div
-                    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-75">
+        <!-- Tool Container -->
+        <div class="glass-panel rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
+            
+            <!-- Left Side: Upload -->
+            <div class="p-8 lg:p-10 border-b md:border-b-0 md:border-r border-white/5 space-y-8">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500">Step 1: Upload</h2>
+                    <i data-lucide="image" class="w-4 h-4 text-brand-cyan"></i>
                 </div>
 
-                <h2 class="text-2xl font-bold mb-6 text-white flex items-center">
-                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center mr-3 shadow-inner">
-                        <i class="fas fa-cloud-upload-alt text-primary-400"></i>
-                    </div>
-                    Upload Media
-                </h2>
-
-                <form id="uploadForm" class="flex-grow flex flex-col relative z-10">
-                    <div id="dropZone"
-                        class="flex-grow border-2 border-dashed border-slate-700 rounded-2xl p-10 flex flex-col items-center justify-center text-center cursor-pointer hover:border-primary-500 hover:bg-slate-800/40 transition-all duration-300 mb-6 group/drop">
-                        <div
-                            class="w-20 h-20 rounded-full bg-slate-800 flex items-center justify-center mb-4 group-hover/drop:scale-110 group-hover/drop:bg-primary-900/60 transition-transform duration-300 shadow-lg">
-                            <i class="fas fa-image text-3xl text-primary-400"></i>
+                <div id="drop-zone" class="input-area rounded-2xl h-[300px] flex flex-col items-center justify-center text-center p-6 cursor-pointer relative group overflow-hidden">
+                    <div id="upload-prompt" class="space-y-4">
+                        <div class="w-14 h-14 rounded-xl bg-brand-cyan/10 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="upload-cloud" class="w-7 h-7 text-brand-cyan"></i>
                         </div>
-                        <p class="text-lg text-slate-200 font-medium mb-2">Drag & drop your image</p>
-                        <p class="text-sm text-slate-500 mb-4">PNG, JPG, JPEG up to 10MB</p>
-                        <button type="button"
-                            class="px-6 py-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition-colors font-medium text-sm border border-slate-700 focus:outline-none">
-                            Browse Files
-                        </button>
-                        <input type="file" id="fileInput" name="image" accept="image/*" class="hidden">
+                        <div>
+                            <p class="font-bold text-white">Drop your image</p>
+                            <p class="text-xs text-gray-500 mt-1">or click to browse files</p>
+                        </div>
                     </div>
 
-                    <!-- Preview -->
-                    <div id="previewContainer"
-                        class="hidden mb-6 relative rounded-2xl overflow-hidden border border-slate-700 shadow-xl group/preview bg-dark-950 flex items-center justify-center min-h-[200px]">
-                        <img id="imagePreview" src="" alt="Selected image preview"
-                            class="w-full h-auto max-h-80 object-contain">
-                        <div
-                            class="absolute inset-0 bg-dark-950/60 opacity-0 group-hover/preview:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <button type="button" id="clearBtn"
-                                class="bg-red-500/90 hover:bg-red-500 text-white rounded-full w-12 h-12 flex items-center justify-center focus:outline-none transform hover:scale-110 transition-all shadow-lg"
-                                aria-label="Remove image">
-                                <i class="fas fa-trash-alt"></i>
+                    <div id="preview-container" class="hidden absolute inset-0 p-3 w-full h-full">
+                        <div class="relative w-full h-full bg-black/40 rounded-xl overflow-hidden flex items-center justify-center">
+                            <img id="image-preview" src="" alt="Preview" class="max-w-full max-h-full object-contain">
+                            <div id="scan-line" class="scan-line hidden animate-scan"></div>
+                            <button id="remove-file" class="absolute top-2 right-2 p-1.5 bg-black/60 hover:bg-red-500/80 text-white rounded-lg backdrop-blur-md transition-all">
+                                <i data-lucide="x" class="w-3 h-3"></i>
                             </button>
                         </div>
                     </div>
 
-                    <!-- Configuration Options -->
-                    <div class="space-y-5 mb-8 bg-slate-800/30 p-5 rounded-2xl border border-slate-700/50">
-                        <div class="flex items-center p-2">
-                            <i class="fas fa-microchip text-primary-400 mr-3"></i>
-                            <span class="text-sm text-slate-300 font-medium">Engine: Tesseract OCR (Lightweight)</span>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="processBtn"
-                        class="w-full bg-gradient-to-r from-primary-600 to-secondary-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-primary-500/25 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark-900 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-1 group relative overflow-hidden">
-                        <span
-                            class="absolute top-0 left-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out z-0"></span>
-                        <span id="btnText" class="relative z-10 flex items-center justify-center text-lg">
-                            <i class="fas fa-microchip mr-2"></i> Process Image
-                        </span>
-                        <span id="btnSpinner" class="hidden relative z-10 flex items-center justify-center text-lg">
-                            <i class="fas fa-circle-notch fa-spin mr-2"></i> Processing...
-                        </span>
-                    </button>
-                </form>
-            </section>
-
-            <!-- Right Column: Results Section -->
-            <section
-                class="bg-dark-900/60 backdrop-blur-2xl rounded-3xl shadow-2xl border border-slate-800/80 p-6 md:p-8 flex flex-col h-full relative overflow-hidden animate-slide-up"
-                style="animation-delay: 0.1s;">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-teal-500 opacity-75">
+                    <input type="file" id="file-input" class="hidden" accept="image/*">
                 </div>
 
-                <h2 class="text-2xl font-bold mb-6 text-white flex items-center">
-                    <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center mr-3 shadow-inner">
-                        <i class="fas fa-terminal text-emerald-400"></i>
-                    </div>
-                    Output Console
-                </h2>
+                <button id="extract-btn" disabled class="w-full h-14 btn-primary text-white font-bold rounded-xl disabled:opacity-20 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3">
+                    <span id="btn-text">Extract Text</span>
+                    <i id="btn-icon" data-lucide="zap" class="w-4 h-4"></i>
+                    <i id="btn-loader" data-lucide="loader-2" class="w-4 h-4 animate-spin hidden"></i>
+                </button>
+            </div>
 
-                <!-- Initial State -->
-                <div id="emptyState"
-                    class="flex-grow flex flex-col items-center justify-center text-slate-500 h-64 border-2 border-dashed border-slate-800/60 rounded-2xl bg-slate-800/20">
-                    <div
-                        class="w-24 h-24 rounded-full bg-slate-800/60 flex items-center justify-center mb-6 shadow-inner">
-                        <i class="fas fa-laptop-code text-4xl text-slate-600"></i>
+            <!-- Right Side: Result -->
+            <div class="p-8 lg:p-10 bg-black/20 flex flex-col space-y-8">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500">Step 2: Output</h2>
+                    <div class="flex gap-1">
+                        <button id="copy-btn" class="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all" title="Copy">
+                            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <button id="download-btn" class="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all" title="Download">
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                        </button>
                     </div>
-                    <h3 class="text-xl font-medium text-slate-400 mb-2">Awaiting Input</h3>
-                    <p class="text-center text-sm px-6 max-w-sm">Upload an image and run extraction to see the
-                        structured output here.</p>
                 </div>
 
-                <!-- Results container -->
-                <div id="resultsContainer" class="hidden flex-grow flex flex-col h-full">
+                <div class="input-area rounded-2xl flex-grow relative overflow-hidden flex flex-col min-h-[300px]">
+                    <div id="placeholder-view" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 space-y-4 opacity-40">
+                        <i data-lucide="terminal" class="w-10 h-10 text-brand-purple"></i>
+                        <p class="text-xs max-w-[180px]">Run extraction to see the text results here.</p>
+                    </div>
 
-                    <!-- OCR Result (Prominent) -->
-                    <article class="flex-grow flex flex-col mb-6">
-                        <div class="flex justify-between items-center mb-3">
-                            <h3 class="font-semibold text-slate-300 flex items-center text-sm uppercase tracking-wider">
-                                <i class="fas fa-align-left text-primary-400 mr-2"></i> Extracted Text
-                            </h3>
-                            <div class="flex space-x-2">
-                                <button id="copyBtn"
-                                    class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-medium transition-colors border border-slate-700 flex items-center focus:outline-none"
-                                    title="Copy to clipboard">
-                                    <i class="fas fa-copy mr-1.5"></i> <span id="copyText">Copy</span>
-                                </button>
-                                <button id="downloadBtn"
-                                    class="px-3 py-1.5 bg-slate-800 hover:bg-emerald-900/50 hover:text-emerald-400 hover:border-emerald-700/50 text-slate-300 rounded-lg text-xs font-medium transition-all border border-slate-700 flex items-center focus:outline-none"
-                                    title="Download as .txt">
-                                    <i class="fas fa-download mr-1.5"></i> Save
-                                </button>
-                            </div>
-                        </div>
-                        <div class="relative flex-grow flex flex-col group">
-                            <textarea id="ocrOutput"
-                                class="w-full flex-grow p-5 bg-dark-950/80 border border-slate-700 rounded-xl text-slate-300 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 resize-none font-mono text-sm shadow-inner transition-colors z-10"
-                                readonly placeholder="Extraction results will appear here..."></textarea>
-                            <div
-                                class="absolute top-4 right-4 pointer-events-none opacity-10 group-hover:opacity-20 transition-opacity z-0">
-                                <i class="fas fa-quote-right text-6xl text-slate-400"></i>
-                            </div>
-                        </div>
-                    </article>
+                    <textarea id="output-text" readonly class="hidden w-full h-full bg-transparent p-6 text-sm text-gray-300 font-mono leading-relaxed resize-none focus:outline-none" placeholder="Ready..."></textarea>
                 </div>
-            </section>
+
+                <div class="flex justify-between items-center px-1">
+                    <div class="flex gap-4 text-[10px] text-gray-600 font-bold uppercase tracking-widest">
+                        <span><span id="word-count" class="text-gray-400">0</span> Words</span>
+                        <span><span id="char-count" class="text-gray-400">0</span> Chars</span>
+                    </div>
+                    <div class="text-[10px] text-brand-cyan font-bold uppercase tracking-widest flex items-center gap-1.5">
+                        <span class="w-1 h-1 bg-brand-cyan rounded-full shadow-[0_0_8px_#00f2fe]"></span>
+                        Engine Ready
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
 
-    <!-- Script for handling interactions -->
+        <footer class="text-center">
+            <p class="text-[10px] text-gray-700 font-bold uppercase tracking-[0.4em]">ToolsFlash Vision System</p>
+        </footer>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-panel px-6 py-3 rounded-full border-brand-purple/20 text-white text-xs font-bold uppercase tracking-widest shadow-2xl transition-all duration-300 translate-y-20 opacity-0 z-50 flex items-center gap-3">
+        <i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i>
+        <span id="toast-message">Success</span>
+    </div>
+
     <script>
-        // DOM Elements
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
-        const uploadForm = document.getElementById('uploadForm');
-        const previewContainer = document.getElementById('previewContainer');
-        const imagePreview = document.getElementById('imagePreview');
-        const clearBtn = document.getElementById('clearBtn');
-        const processBtn = document.getElementById('processBtn');
-        const btnText = document.getElementById('btnText');
-        const btnSpinner = document.getElementById('btnSpinner');
+        lucide.createIcons();
 
-        const emptyState = document.getElementById('emptyState');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const ocrOutput = document.getElementById('ocrOutput');
-
-        const copyBtn = document.getElementById('copyBtn');
-        const copyText = document.getElementById('copyText');
-        const downloadBtn = document.getElementById('downloadBtn');
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const uploadPrompt = document.getElementById('upload-prompt');
+        const previewContainer = document.getElementById('preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const scanLine = document.getElementById('scan-line');
+        const extractBtn = document.getElementById('extract-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const btnLoader = document.getElementById('btn-loader');
+        const outputText = document.getElementById('output-text');
+        const placeholderView = document.getElementById('placeholder-view');
+        const wordCount = document.getElementById('word-count');
+        const charCount = document.getElementById('char-count');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
 
         let currentFile = null;
 
-        // Handle Drag & Drop
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, preventDefaults, false);
-        });
+        function showToast(msg) {
+            toastMessage.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
 
-        function preventDefaults(e) {
-            e.preventDefault();
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) return showToast('Upload image only');
+            currentFile = file;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                imagePreview.src = e.target.result;
+                uploadPrompt.classList.add('hidden');
+                previewContainer.classList.remove('hidden');
+                extractBtn.disabled = false;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        dropZone.onclick = () => fileInput.click();
+        fileInput.onchange = (e) => handleFile(e.target.files[0]);
+        dropZone.ondragover = (e) => { e.preventDefault(); dropZone.classList.add('border-brand-cyan/50'); };
+        dropZone.ondragleave = () => dropZone.classList.remove('border-brand-cyan/50');
+        dropZone.ondrop = (e) => { e.preventDefault(); handleFile(e.dataTransfer.files[0]); };
+
+        document.getElementById('remove-file').onclick = (e) => {
             e.stopPropagation();
-        }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => {
-                dropZone.classList.add('bg-slate-800/60', 'border-primary-500');
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => {
-                dropZone.classList.remove('bg-slate-800/60', 'border-primary-500');
-            }, false);
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            let dt = e.dataTransfer;
-            let files = dt.files;
-            handleFiles(files);
-        });
-
-        dropZone.addEventListener('click', (e) => {
-            fileInput.click();
-        });
-
-        fileInput.addEventListener('change', function () {
-            handleFiles(this.files);
-        });
-
-        function handleFiles(files) {
-            if (files.length > 0) {
-                const file = files[0];
-                if (file.type.startsWith('image/')) {
-                    currentFile = file;
-
-                    // Show preview
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        imagePreview.src = e.target.result;
-                        dropZone.classList.add('hidden');
-                        previewContainer.classList.remove('hidden');
-
-                        // Add animation class
-                        previewContainer.classList.add('animate-fade-in');
-                        setTimeout(() => previewContainer.classList.remove('animate-fade-in'), 500);
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    alert('Please select a valid image file (PNG, JPG, JPEG).');
-                }
-            }
-        }
-
-        clearBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // prevent triggering dropZone click
             currentFile = null;
             fileInput.value = '';
-            imagePreview.src = '';
+            uploadPrompt.classList.remove('hidden');
             previewContainer.classList.add('hidden');
-            dropZone.classList.remove('hidden');
-            dropZone.classList.add('animate-fade-in');
-            setTimeout(() => dropZone.classList.remove('animate-fade-in'), 500);
+            extractBtn.disabled = true;
+            outputText.classList.add('hidden');
+            placeholderView.classList.remove('hidden');
+            wordCount.textContent = 0;
+            charCount.textContent = 0;
+        };
 
-            // Reset results smoothly
-            resultsContainer.classList.add('hidden');
-            emptyState.classList.remove('hidden');
-            emptyState.classList.add('animate-fade-in');
-            setTimeout(() => emptyState.classList.remove('animate-fade-in'), 500);
+        extractBtn.onclick = async () => {
+            if (!currentFile) return;
+            const fd = new FormData();
+            fd.append('image', currentFile);
 
-            ocrOutput.value = '';
-        });
-
-        // Form Submit
-        uploadForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!currentFile) {
-                // Add shake animation to dropzone to indicate error
-                dropZone.classList.add('border-red-500');
-                setTimeout(() => dropZone.classList.remove('border-red-500'), 500);
-                return;
-            }
-
-            const formData = new FormData(uploadForm);
-            formData.set('image', currentFile);
-
-            // UI Loading state
-            processBtn.disabled = true;
-            btnText.classList.add('hidden');
-            btnSpinner.classList.remove('hidden');
-
-            emptyState.classList.add('hidden');
-            resultsContainer.classList.remove('hidden');
-            resultsContainer.classList.add('animate-fade-in');
-
-            ocrOutput.value = '> Initializing extraction pipeline...\n> Please wait, analyzing image structure...';
+            extractBtn.disabled = true;
+            btnText.textContent = 'Processing...';
+            btnIcon.classList.add('hidden');
+            btnLoader.classList.remove('hidden');
+            scanLine.classList.remove('hidden');
+            placeholderView.classList.add('hidden');
+            outputText.classList.remove('hidden');
+            outputText.value = 'Analyzing...';
 
             try {
-                const response = await fetch('/process', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    ocrOutput.value = data.ocr_text || 'No text detected in the image.';
+                const res = await fetch('/process', { method: 'POST', body: fd });
+                const data = await res.json();
+                if (res.ok) {
+                    outputText.value = data.ocr_text || 'No text found.';
+                    wordCount.textContent = outputText.value.trim().split(/\s+/).length;
+                    charCount.textContent = outputText.value.length;
                 } else {
-                    ocrOutput.value = '> ERROR: ' + (data.error || 'Unknown error occurred.');
+                    outputText.value = 'Error: ' + data.error;
                 }
-            } catch (error) {
-                ocrOutput.value = '> CONNECTION ERROR: ' + error.message;
+            } catch (e) {
+                outputText.value = 'Network error.';
             } finally {
-                processBtn.disabled = false;
-                btnSpinner.classList.add('hidden');
-                btnText.classList.remove('hidden');
-                setTimeout(() => resultsContainer.classList.remove('animate-fade-in'), 500);
+                extractBtn.disabled = false;
+                btnText.textContent = 'Extract Text';
+                btnIcon.classList.remove('hidden');
+                btnLoader.classList.add('hidden');
+                scanLine.classList.add('hidden');
             }
-        });
+        };
 
-        // Copy functionality
-        copyBtn.addEventListener('click', () => {
-            if (ocrOutput.value && !ocrOutput.value.startsWith('> ')) {
-                navigator.clipboard.writeText(ocrOutput.value).then(() => {
-                    const originalHTML = copyBtn.innerHTML;
-                    copyBtn.innerHTML = '<i class="fas fa-check text-emerald-400 mr-1.5"></i> <span class="text-emerald-400">Copied!</span>';
-                    copyBtn.classList.add('border-emerald-500', 'bg-emerald-900/30');
-                    setTimeout(() => {
-                        copyBtn.innerHTML = originalHTML;
-                        copyBtn.classList.remove('border-emerald-500', 'bg-emerald-900/30');
-                    }, 2000);
-                });
+        document.getElementById('copy-btn').onclick = () => {
+            if (!outputText.value) return;
+            navigator.clipboard.writeText(outputText.value);
+            showToast('Copied!');
+        };
+
+        document.getElementById('download-btn').onclick = async () => {
+            if (!outputText.value) return;
+            const res = await fetch('/api/download-txt', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: outputText.value })
+            });
+            if (res.ok) {
+                const blob = await res.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ocr-result.txt';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
             }
-        });
-
-        // Download functionality
-        downloadBtn.addEventListener('click', async () => {
-            if (ocrOutput.value && !ocrOutput.value.startsWith('> ')) {
-                const text = ocrOutput.value;
-                try {
-                    const response = await fetch('/api/download-txt', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ text: text })
-                    });
-
-                    if (response.ok) {
-                        const blob = await response.blob();
-                        const url = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = 'extracted_text.txt';
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        window.URL.revokeObjectURL(url);
-                    } else {
-                        alert('Failed to download.');
-                    }
-                } catch (error) {
-                    alert('Download error: ' + error.message);
-                }
-            }
-        });
-
-        // Optional: Custom animation delay for staggered loading
-        document.querySelectorAll('.animation-delay-2000').forEach(el => el.style.animationDelay = '2s');
-        document.querySelectorAll('.animation-delay-4000').forEach(el => el.style.animationDelay = '4s');
+        };
     </script>
 </body>
-
 </html>

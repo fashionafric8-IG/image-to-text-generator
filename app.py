@@ -30,41 +30,62 @@ def extract_text(file_path):
     Unified OCR function that applies preprocessing and uses Tesseract.
     """
     try:
+        # Preprocess the image
         preprocessed_img = preprocess_for_ocr(file_path)
+        
+        # Extract text using Tesseract
         ocr_text = extract_text_tesseract(preprocessed_img)
-        return ocr_text if ocr_text.strip() else "No text could be extracted from this image."
+        
+        if not ocr_text.strip():
+            return "No text could be extracted from this image."
+            
+        return ocr_text
     except Exception as e:
-        print(f"Extraction error: {e}")
-        return "Error processing image for OCR."
+        print(f"Extraction error details: {str(e)}")
+        # We re-raise or return a specific error that the route can catch
+        raise Exception(f"OCR Processing failed: {str(e)}")
 
 @app.route('/process', methods=['POST'])
 def process_image_web():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No file part in the request'}), 400
-        
-    file = request.files['image']
-    if file.filename == '':
-        return jsonify({'error': 'No selected file'}), 400
-        
-    if not allowed_file(file.filename):
-        return jsonify({'error': 'File type not allowed'}), 400
+    try:
+        if 'image' not in request.files:
+            return jsonify({'error': 'No file part in the request', 'status': 'error'}), 400
+            
+        file = request.files['image']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file', 'status': 'error'}), 400
+            
+        if not allowed_file(file.filename):
+            return jsonify({'error': 'File type not allowed', 'status': 'error'}), 400
 
-    if file:
+        # Create safe filename and path
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        
+        # Save file (this can fail due to permissions/disk space)
         file.save(file_path)
 
-        try:
-            # 1. Image Preprocessing & OCR (Tesseract Only)
-            ocr_text = extract_text(file_path)
+        # 1. Image Preprocessing & OCR (Tesseract Only)
+        ocr_text = extract_text(file_path)
 
-            return jsonify({
-                'ocr_text': ocr_text,
-                'status': 'success'
-            })
+        # Cleanup if you want, but usually keep for a while or use tempfile
+        # os.remove(file_path) 
 
-        except Exception as e:
-            return jsonify({'error': str(e)}), 500
+        return jsonify({
+            'ocr_text': ocr_text,
+            'status': 'success'
+        })
+
+    except Exception as e:
+        # Crucial for production logs
+        print(f"CRITICAL ERROR in /process: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        
+        return jsonify({
+            'error': str(e),
+            'status': 'error'
+        }), 500
 
 @app.route('/api/process-image', methods=['POST'])
 def api_process_image():
