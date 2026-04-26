@@ -25,8 +25,8 @@ def extract_text_tesseract(image):
             
         # Custom config for better accuracy:
         # --oem 3: Default, based on what is available (LSTM)
-        # --psm 3: Fully automatic page segmentation, but no OSD. (Better for general posters)
-        custom_config = r'--oem 3 --psm 3'
+        # --psm 1: Automatic page segmentation with OSD. (Most powerful for complex layouts)
+        custom_config = r'--oem 3 --psm 1'
         
         text = pytesseract.image_to_string(image, config=custom_config)
         return text.strip()
