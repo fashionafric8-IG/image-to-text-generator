@@ -22,13 +22,23 @@ def preprocess_for_ocr(image_path):
     # 1. Convert to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    # 2. Noise removal using median blur
-    noise_removed = cv2.medianBlur(gray, 3)
+    # 2. Upscale image (IMPORTANT for small text/ads)
+    # We use 2x scale with cubic interpolation
+    upscaled = cv2.resize(gray, None, fx=2, fy=2, interpolation=cv2.INTER_CUBIC)
 
-    # 3. Apply thresholding (Otsu's thresholding)
-    _, thresh = cv2.threshold(noise_removed, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # 3. Noise removal using Bilateral Filter
+    # Bilateral filter is excellent for OCR because it smooths noise but preserves sharp edges
+    denoised = cv2.bilateralFilter(upscaled, 9, 75, 75)
+
+    # 4. Apply Otsu's thresholding
+    # This is often more stable for poster-style images than adaptive thresholding
+    _, thresh = cv2.threshold(denoised, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    # 5. Optional: Dilation to thicken text (helps with thin/stylized fonts)
+    kernel = np.ones((2, 2), np.uint8)
+    processed = cv2.dilate(thresh, kernel, iterations=1)
 
     # Convert back to PIL Image so it can be handled easily by pytesseract
-    processed_image = Image.fromarray(thresh)
+    processed_image = Image.fromarray(processed)
     
     return processed_image

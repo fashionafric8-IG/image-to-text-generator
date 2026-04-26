@@ -23,8 +23,12 @@ def extract_text_tesseract(image):
         if not isinstance(image, Image.Image):
             raise TypeError(f"Expected PIL Image object, got {type(image)}")
             
-        # We can add a simple language detection or config if needed, but for now, default config.
-        text = pytesseract.image_to_string(image)
+        # Custom config for better accuracy:
+        # --oem 3: Default, based on what is available (LSTM)
+        # --psm 3: Fully automatic page segmentation, but no OSD. (Better for general posters)
+        custom_config = r'--oem 3 --psm 3'
+        
+        text = pytesseract.image_to_string(image, config=custom_config)
         return text.strip()
     except Exception as e:
         print(f"Tesseract OCR Error: {e}")

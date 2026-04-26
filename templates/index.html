@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCR Tool | ToolsFlash</title>
-    
+
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -50,7 +53,7 @@
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
+
     <style>
         body {
             background-color: #0a0a0a;
@@ -111,27 +114,46 @@
         }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
-<body class="text-gray-100 antialiased selection:bg-purple-500/30 p-6">
 
-    <div class="w-full max-w-4xl mx-auto space-y-12">
-        
-        <!-- Small Centered Title (Serif) -->
-        <header class="text-center">
-            <h1 class="text-xl font-serif text-white tracking-wide mb-1">
-                Image-to-Text <span class="toolsflash-gradient-text italic font-bold">OCR</span>
-            </h1>
-            <div class="w-12 h-[1px] toolsflash-gradient mx-auto opacity-50"></div>
+<body class="text-gray-100 antialiased selection:bg-purple-500/30">
+
+    <div class="w-full max-w-4xl mx-auto pt-16 pb-12 px-6 space-y-12">
+
+        <!-- Simplified ToolsFlash Header -->
+        <header class="text-center space-y-6">
+
+
+            <div class="space-y-3">
+                <h2 class="text-4xl md:text-5xl font-serif text-white tracking-tight leading-tight">
+                    Image-to-Text <br>
+                    <span class="toolsflash-gradient-text italic font-bold">Converter</span>
+                </h2>
+
+            </div>
+            <div class="w-24 h-[1px] toolsflash-gradient mx-auto opacity-30"></div>
         </header>
 
         <!-- Tool Container -->
         <div class="glass-panel rounded-3xl overflow-hidden grid grid-cols-1 md:grid-cols-2">
-            
+
             <!-- Left Side: Upload -->
             <div class="p-8 lg:p-10 border-b md:border-b-0 md:border-r border-white/5 space-y-8">
                 <div class="flex items-center justify-between">
@@ -139,9 +161,11 @@
                     <i data-lucide="image" class="w-4 h-4 text-brand-cyan"></i>
                 </div>
 
-                <div id="drop-zone" class="input-area rounded-2xl h-[300px] flex flex-col items-center justify-center text-center p-6 cursor-pointer relative group overflow-hidden">
+                <div id="drop-zone"
+                    class="input-area rounded-2xl h-[300px] flex flex-col items-center justify-center text-center p-6 cursor-pointer relative group overflow-hidden">
                     <div id="upload-prompt" class="space-y-4">
-                        <div class="w-14 h-14 rounded-xl bg-brand-cyan/10 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-brand-cyan/10 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                             <i data-lucide="upload-cloud" class="w-7 h-7 text-brand-cyan"></i>
                         </div>
                         <div>
@@ -151,10 +175,12 @@
                     </div>
 
                     <div id="preview-container" class="hidden absolute inset-0 p-3 w-full h-full">
-                        <div class="relative w-full h-full bg-black/40 rounded-xl overflow-hidden flex items-center justify-center">
+                        <div
+                            class="relative w-full h-full bg-black/40 rounded-xl overflow-hidden flex items-center justify-center">
                             <img id="image-preview" src="" alt="Preview" class="max-w-full max-h-full object-contain">
                             <div id="scan-line" class="scan-line hidden animate-scan"></div>
-                            <button id="remove-file" class="absolute top-2 right-2 p-1.5 bg-black/60 hover:bg-red-500/80 text-white rounded-lg backdrop-blur-md transition-all">
+                            <button id="remove-file"
+                                class="absolute top-2 right-2 p-1.5 bg-black/60 hover:bg-red-500/80 text-white rounded-lg backdrop-blur-md transition-all">
                                 <i data-lucide="x" class="w-3 h-3"></i>
                             </button>
                         </div>
@@ -163,7 +189,8 @@
                     <input type="file" id="file-input" class="hidden" accept="image/*">
                 </div>
 
-                <button id="extract-btn" disabled class="w-full h-14 btn-primary text-white font-bold rounded-xl disabled:opacity-20 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3">
+                <button id="extract-btn" disabled
+                    class="w-full h-14 btn-primary text-white font-bold rounded-xl disabled:opacity-20 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3">
                     <span id="btn-text">Extract Text</span>
                     <i id="btn-icon" data-lucide="zap" class="w-4 h-4"></i>
                     <i id="btn-loader" data-lucide="loader-2" class="w-4 h-4 animate-spin hidden"></i>
@@ -175,22 +202,29 @@
                 <div class="flex items-center justify-between">
                     <h2 class="text-sm font-semibold uppercase tracking-widest text-gray-500">Step 2: Output</h2>
                     <div class="flex gap-1">
-                        <button id="copy-btn" class="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all" title="Copy">
+                        <button id="copy-btn"
+                            class="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all"
+                            title="Copy">
                             <i data-lucide="copy" class="w-3.5 h-3.5"></i>
                         </button>
-                        <button id="download-btn" class="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all" title="Download">
+                        <button id="download-btn"
+                            class="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-all"
+                            title="Download">
                             <i data-lucide="download" class="w-3.5 h-3.5"></i>
                         </button>
                     </div>
                 </div>
 
                 <div class="input-area rounded-2xl flex-grow relative overflow-hidden flex flex-col min-h-[300px]">
-                    <div id="placeholder-view" class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 space-y-4 opacity-40">
+                    <div id="placeholder-view"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-center p-8 space-y-4 opacity-40">
                         <i data-lucide="terminal" class="w-10 h-10 text-brand-purple"></i>
                         <p class="text-xs max-w-[180px]">Run extraction to see the text results here.</p>
                     </div>
 
-                    <textarea id="output-text" readonly class="hidden w-full h-full bg-transparent p-6 text-sm text-gray-300 font-mono leading-relaxed resize-none focus:outline-none" placeholder="Ready..."></textarea>
+                    <textarea id="output-text" readonly
+                        class="hidden w-full h-full bg-transparent p-6 text-sm text-gray-300 font-mono leading-relaxed resize-none focus:outline-none"
+                        placeholder="Ready..."></textarea>
                 </div>
 
                 <div class="flex justify-between items-center px-1">
@@ -198,7 +232,8 @@
                         <span><span id="word-count" class="text-gray-400">0</span> Words</span>
                         <span><span id="char-count" class="text-gray-400">0</span> Chars</span>
                     </div>
-                    <div class="text-[10px] text-brand-cyan font-bold uppercase tracking-widest flex items-center gap-1.5">
+                    <div
+                        class="text-[10px] text-brand-cyan font-bold uppercase tracking-widest flex items-center gap-1.5">
                         <span class="w-1 h-1 bg-brand-cyan rounded-full shadow-[0_0_8px_#00f2fe]"></span>
                         Engine Ready
                     </div>
@@ -212,7 +247,8 @@
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-panel px-6 py-3 rounded-full border-brand-purple/20 text-white text-xs font-bold uppercase tracking-widest shadow-2xl transition-all duration-300 translate-y-20 opacity-0 z-50 flex items-center gap-3">
+    <div id="toast"
+        class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-panel px-6 py-3 rounded-full border-brand-purple/20 text-white text-xs font-bold uppercase tracking-widest shadow-2xl transition-all duration-300 translate-y-20 opacity-0 z-50 flex items-center gap-3">
         <i data-lucide="check" class="w-4 h-4 text-brand-cyan"></i>
         <span id="toast-message">Success</span>
     </div>
@@ -297,7 +333,7 @@
 
             try {
                 const res = await fetch('/process', { method: 'POST', body: fd });
-                
+
                 // Handle non-JSON response safely
                 const contentType = res.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
@@ -351,4 +387,5 @@
         };
     </script>
 </body>
+
 </html>
