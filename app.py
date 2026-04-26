@@ -7,8 +7,10 @@ import io
 # Import project modules
 from utils.image_preprocessing import preprocess_for_ocr
 from ocr_engine.tesseract_ocr import extract_text_tesseract
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=["https://image.toolsflash.org"])
 
 # Configure Uploads
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
@@ -109,4 +111,4 @@ def download_txt():
     )
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=5001)

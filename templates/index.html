@@ -297,16 +297,25 @@
 
             try {
                 const res = await fetch('/process', { method: 'POST', body: fd });
+                
+                // Handle non-JSON response safely
+                const contentType = res.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await res.text();
+                    throw new Error("Server returned HTML instead of JSON. Check server logs.\n" + text.substring(0, 100));
+                }
+
                 const data = await res.json();
                 if (res.ok) {
                     outputText.value = data.ocr_text || 'No text found.';
-                    wordCount.textContent = outputText.value.trim().split(/\s+/).length;
+                    wordCount.textContent = outputText.value.trim().split(/\s+/).length || 0;
                     charCount.textContent = outputText.value.length;
                 } else {
-                    outputText.value = 'Error: ' + data.error;
+                    outputText.value = 'Error: ' + (data.error || 'Unknown error');
                 }
             } catch (e) {
-                outputText.value = 'Network error.';
+                outputText.value = 'CONNECTION ERROR: ' + e.message;
+                console.error("Fetch Error:", e);
             } finally {
                 extractBtn.disabled = false;
                 btnText.textContent = 'Extract Text';
